@@ -61,6 +61,26 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+const displayMovements = function(movements){
+  containerMovements.innerHTML = '';
+
+  movements.forEach((mov, i, )=>{
+    const type =  ( mov > 0 )? 'deposit': 'withdrawal'
+    const html= `
+    <div class="movements__row">
+          <div class="movements__type movements__type--${type}">${i + 1 } ${type}</div>
+          <div class="movements__date"></div>
+          <div class="movements__value">${mov}€</div>
+        </div>
+    `
+      containerMovements.insertAdjacentHTML("afterbegin",html)
+  })
+}
+
+displayMovements(account1.movements)
+
+
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -71,6 +91,48 @@ const currencies = new Map([
   ['GBP', 'Pound sterling'],
 ]);
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+currencies.forEach(function(value, key, map){
+  console.log(`${key} :${value}, and map is:${map}`)
+})
+
+
+
+/* const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+for (const movement of movements){
+  if(movement > 0){
+    console.log(`You deposited ${movement}`)
+  } else{
+    console.log(`You withdrew ${Math.abs(movement)}`)
+  }
+} */
+
+
+
 
 /////////////////////////////////////////////////
+
+
+/* let arr = ['a', 'b', 'c', 'd','e']
+
+let arr2 = ['j', 'i','h','g','f'] */
+
+//console.log(arr2.reverse())
+
+//let allArr = arr.concat(arr2)
+
+//console.log(allArr)
+
+//console.log(allArr)
+
+//console.log(allArr.join('\n'))
+
+
+// getting the last element
+
+// console.log(arr.slice(-1)[0])
+
+// console.log(arr[arr.length -1 ])
+
+// console.log(arr.at(-1))
+
