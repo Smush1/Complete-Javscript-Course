@@ -85,20 +85,38 @@ displayMovements(account1.movements)
 /////////////////////////////////////////////////
 // LECTURES
 
-const currencies = new Map([
-  ['USD', 'United States dollar'],
-  ['EUR', 'Euro'],
-  ['GBP', 'Pound sterling'],
-]);
 
-currencies.forEach(function(value, key, map){
-  console.log(`${key} :${value}, and map is:${map}`)
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+const eurToUsd = 1.1;
+
+const movementsUsd = movements.map((mov)=>{
+  return mov * eurToUsd
 })
 
+console.log(movementsUsd)
 
 
-/* const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
+
+
+
+
+// const currencies = new Map([
+//   ['USD', 'United States dollar'],
+//   ['EUR', 'Euro'],
+//   ['GBP', 'Pound sterling'],
+// ]);
+
+// currencies.forEach(function(value, key, map){
+//   console.log(`${key} :${value}, and map is:${map}`)
+// })
+
+
+
+ 
+/*
 for (const movement of movements){
   if(movement > 0){
     console.log(`You deposited ${movement}`)
@@ -110,6 +128,12 @@ for (const movement of movements){
 
 
 
+
+
+
+
+
+//  Extra Tasks and challenges
 /////////////////////////////////////////////////
 
 
@@ -136,3 +160,30 @@ let arr2 = ['j', 'i','h','g','f'] */
 
 // console.log(arr.at(-1))
 
+
+
+
+
+
+/* const checkDogs = function ( [...dogsJulia], [...dogsKate]){
+
+  let dogsJuliaCopy = dogsJulia.slice(1).slice(0,-2) ;
+
+  function internalCheck(dogsArray){
+     dogsArray.forEach((dogAge, n)=>{
+    (dogAge >= 3 ) ? 
+    console.log(`Dog number ${n+1} is an adult, and is ${dogAge} years old`) :  
+    console.log(`Dog number ${n+1} is still a puppy`)
+  })
+
+  }
+
+  internalCheck(dogsJuliaCopy.concat(dogsKate));
+
+
+  console.log(dogsJuliaCopy, dogsKate)
+  
+}
+
+
+checkDogs([10,11,2,15,8], [4,3,6,5,8]) */
