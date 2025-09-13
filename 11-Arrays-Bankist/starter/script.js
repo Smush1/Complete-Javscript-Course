@@ -80,6 +80,73 @@ const displayMovements = function(movements){
 displayMovements(account1.movements)
 
 
+const calcDisplayBalance = function(movements){
+ const balance = movements.reduce((acc, mov)=>{
+    return acc + mov
+  })
+  labelBalance.textContent = `${ balance}€`
+}
+
+
+
+
+
+
+
+
+
+
+
+const createUserName = (accs)=>{
+  accs.forEach((acc)=>{
+    acc.username = acc.owner.toLowerCase()
+  .split(' ')
+  .map((name)=>{ return name.charAt(0)})
+  .join('')
+  })
+
+
+}
+
+
+
+
+createUserName(accounts)
+
+
+ console.log(accounts)
+
+
+const calcDisplaySummary = (movements)=>{
+ const incomes = movements.filter((mov)=> mov > 0)
+           .reduce((acc, mov)=> acc + mov, 0)
+  labelSumIn.textContent = `${incomes}€`
+
+
+  const out = movements.filter((mov)=> mov < 0)
+                       .reduce((acc, mov)=> acc + mov, 0)
+  labelSumOut.textContent = `${Math.abs(out)}€`
+
+  const interest = movements.filter((mov=> mov > 0))
+                            .map((deposit)=> deposit * 1.2/100)
+                            .filter((int, i, arr )=> { 
+                              // console.log(int, arr)
+                              return int >= 1
+                            })
+                            .reduce((acc, int)=> acc + int )
+  labelSumInterest.textContent = interest
+}
+
+
+calcDisplaySummary(account1.movements)
+
+
+
+
+
+
+
+
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -89,14 +156,158 @@ displayMovements(account1.movements)
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-const eurToUsd = 1.1;
 
-const movementsUsd = movements.map((mov)=>{
-  return mov * eurToUsd
-})
+/* Find method */
 
-console.log(movementsUsd)
+/* const firstWithrawal = movements.find((mov)=> mov < 0)
 
+console.log(firstWithrawal) */
+
+const account = accounts.find((acc)=> acc.owner === 'Jessica Davis' )
+
+console.log(account)
+
+
+
+
+
+
+
+/*  CHAINING ARRAY METHODS */
+// const depositTotalUSD = movements.filter((mov)=> mov > 0)
+//                                   .map((mov)=> mov * 1.1)
+//                                   .reduce((acc, mov)=> acc + mov,0)
+
+// console.log(movements)
+// console.log(depositTotalUSD)
+
+
+//console.log(movements)
+
+
+/* const balance = movements.reduce((sum, mov, i)=>{
+  console.log(`Iteration ${i}: Total is ${sum}`)
+  return sum + mov
+},0)
+
+console.log(balance)
+
+
+
+
+
+let sum=0;
+for (let mov of movements){
+  sum += mov;
+  console.log(`Iteration : Total is ${sum}`)
+  
+} */
+
+
+
+
+// const max = movements.reduce((acc, mov)=>{
+//   if(acc < mov){
+//     return acc
+//   }
+//   else 
+//     return mov
+// })
+
+// console.log(max)
+
+
+/* Coding challenge */
+
+// const calcAverageHumanAge = (dogAges)=>{
+//   const dogAgeInHumanYears = dogAges.map(( dogAge)=>{
+//     // if(dogAge <= 2)
+//     //   return dogAge * 2
+//     // else
+//     //   return 16 + (dogAge * 4)
+
+//       return (dogAge <= 2) ? dogAge * 2: 16 + (dogAge * 4)
+//   })
+
+//   console.log(dogAgeInHumanYears)
+
+//   const adultDogs = dogAgeInHumanYears.filter((age)=>{
+//     return age >= 18
+//   })
+  
+//   console.log(adultDogs)
+//   // const adultDogsAverageAge = adultDogs.reduce((acc, adultAge)=>{
+//   //   return acc  + adultAge 
+    
+//   // }, 0)/adultDogs.length
+
+//   const adultDogsAverageAge = adultDogs.reduce((acc, adultAge, i, arr)=>{
+//     return acc  + adultAge / arr.length
+    
+//   }, 0)
+
+
+//   return adultDogsAverageAge
+// }
+
+
+// console.log(calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3 ]))
+
+
+
+
+
+
+// const deposits = movements.filter( mov=> mov > 0 )
+
+// console.log(deposits)
+
+
+// const withdrawal = movements.filter( mov=> mov < 0 )
+
+// console.log(withdrawal)
+
+// Accumulator -> SNOWBALL -> Total
+
+
+
+
+
+
+
+
+// const eurToUsd = 1.1;
+
+// const movementsUsd = movements.map((mov)=>{
+//   return mov * eurToUsd
+// })
+
+// console.log(movementsUsd)
+
+
+
+
+// const movementDescriptions = movements.map((mov, i)=>{
+
+//     return (`You ${(mov > 0)? 'deposited': 'withdrew'} ${Math.abs(mov)}`)
+
+//   //   if(mov > 0){
+//   //   return (`You deposited ${mov}`)
+//   // } else{
+//   //   return (`You withdrew ${Math.abs(mov)}`)
+//   // }
+
+// })
+
+
+/* console.log(movementDescriptions) */
+
+// const movementsUsd2 =[]
+// for (const mov of movements){
+//   movementsUsd2.push(mov * eurToUsd)
+
+// }
+//   console.log(movementsUsd2)
 
 
 
