@@ -78,13 +78,17 @@ const updateUI = function(acc){
 }
 
 // Function to display all the transactions or movements
-const displayMovements = function(movements){
+const displayMovements = function(movements, sort = false){
   containerMovements.innerHTML = '';
 
-  movements.forEach((mov, i, )=>{
+  const movs = sort ? movements.slice().sort((a,b)=> a - b) : movements;
+  
+
+
+  movs.forEach((mov, i, )=>{
     const type =  ( mov > 0 )? 'deposit': 'withdrawal'
     const html= `
-    <div class="movements__row">
+        <div class="movements__row">
           <div class="movements__type movements__type--${type}">${i + 1 } ${type}</div>
           <div class="movements__date"></div>
           <div class="movements__value">${mov}€</div>
@@ -132,7 +136,7 @@ const createUserName = (accs)=>{
 createUserName(accounts)
 
 
- console.log(accounts)
+// console.log(accounts)
 
 // Function to display the incoming, interest, outgoing  (summary)  / dyamic interest rate
 const calcDisplaySummary = (movements, intR)=>{
@@ -284,9 +288,12 @@ btnClose.addEventListener(('click'),(e)=>{
 })
 
 
-
-
-
+let sorted = false;
+btnSort.addEventListener(("click"),()=>{
+  sorted = !sorted
+  displayMovements(currentAccount.movements, sorted)
+  console.log(sorted)
+})
 
 
 
@@ -298,6 +305,40 @@ btnClose.addEventListener(('click'),(e)=>{
 
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+//  SORTING ARRAYS
+// const owners = ['Jonas', 'Zach', 'Adam', 'Martin']
+
+//mutate the original string
+// const sortOwners = owners.sort()
+// console.log(sortOwners)
+
+console.log(movements)
+
+// return < 0  -> a, b  (keep order)
+// return > 0  -> b, a  (switch order)
+
+
+// Ascending
+// movements.sort( (a, b)=>{
+//   if( a > b)
+//     return 1
+//   else
+//     return -1
+// })
+
+movements.sort((a, b ) => a - b )
+console.log(movements)
+
+
+
+
+// Descending 
+// 
+movements.sort((a,b)=> b - a )
+
+console.log(movements)
+
 
 
 // FLAT AND FLATMAP
@@ -645,3 +686,9 @@ let arr2 = ['j', 'i','h','g','f'] */
 
 
 checkDogs([10,11,2,15,8], [4,3,6,5,8]) */
+
+
+
+
+
+
