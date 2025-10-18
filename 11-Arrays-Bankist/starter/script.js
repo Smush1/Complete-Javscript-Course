@@ -10,6 +10,7 @@ const account1 = {
   movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
   interestRate: 1.2, // %
   pin: 1111,
+  type: 'premium'
 };
 
 const account2 = {
@@ -17,6 +18,7 @@ const account2 = {
   movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
   interestRate: 1.5,
   pin: 2222,
+  type: 'premium'
 };
 
 const account3 = {
@@ -24,6 +26,7 @@ const account3 = {
   movements: [200, -200, 340, -300, -20, 50, 400, -460],
   interestRate: 0.7,
   pin: 3333,
+  type: 'basic'
 };
 
 const account4 = {
@@ -31,6 +34,7 @@ const account4 = {
   movements: [430, 1000, 700, 50, 90],
   interestRate: 1,
   pin: 4444,
+  type: 'standard'
 };
 
 const accounts = [account1, account2, account3, account4];
@@ -304,7 +308,109 @@ btnSort.addEventListener(("click"),()=>{
 
 
 
+// Non-Destructive Alternatives: toReversed, toSorted, toSpliced, with
+
+
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+console.log(movements)
+
+// const reversedArr = movements.slice().reverse()
+// const reversedArr = movements.toReversed();
+// console.log(reversedArr)
+
+
+// movements[1] = 2000;
+
+// const newMovements = movements.with(1, 2000)
+// console.log(newMovements)
+// console.log(movements)
+
+
+
+// MORE WAYS TO CREATE AND FILLING AN ARRAY
+
+
+// empty array + fill method (fill mutates the array)
+
+// const array = [1,2,3,4,5,6,7]
+
+// console.log(array)
+
+
+// const emptyArray = new Array(7)
+
+// emptyArray.fill(1, 3, 5)
+
+// console.log(emptyArray)
+
+// console.log(array.fill(23, 4))
+
+// console.log(array)
+
+
+// Array.from method (to create arrays) and arrays of querySelector element
+
+// const y = Array.from({length: 7}, ()=> 1)
+
+// console.log(y)
+
+
+// const z = Array.from({length: 7}, (_,i)=> i + 1)
+
+// console.log(z)
+
+// const diceRandom = Array.from({length: 100}, ()=> Math.floor(Math.random() * 7))
+
+// console.log(diceRandom)
+
+
+
+// labelBalance.addEventListener(('click'),()=>{
+//     const movementsUI  = Array.from(document.querySelectorAll('.movements__value'), (mov)=>mov.textContent.replace('€','') )
+
+    //const arr = movementsUI.map((mov)=>mov.textContent.replace('€',''))
+
+    //arr.reduce((acc, cur) => Number(acc) + Number(cur))
+
+    // const movementsUI2 = [...document.querySelectorAll('.movements__value')]
+
+    // console.log(movementsUI2)
+//})
+
+
+
+
+//  ARRAY GROUPING
+
+// const groupedMovements = Object.groupBy(movements,
+//   movement => 
+//   movement > 0 ? 'deposits' : 'withdrawals' );
+
+// console.log(groupedMovements)
+
+// const groupedByActivites = Object.groupBy(accounts, 
+//   account =>
+//   {
+//     const movementCount = account.movements.length
+//     if(movementCount >=8 ) return 'very active'
+//     if( movementCount >=4) return 'active'
+//     if( movementCount >=1) return 'moderate'
+//      return 'inactive'
+
+//   }
+//   )
+ 
+//   console.log(groupedByActivites)
+
+
+// const groupByAccountType = Object.groupBy(accounts, account=>account.type)
+
+// console.log(groupByAccountType)
+
+
+
+
 
 //  SORTING ARRAYS
 // const owners = ['Jonas', 'Zach', 'Adam', 'Martin']
@@ -313,7 +419,7 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // const sortOwners = owners.sort()
 // console.log(sortOwners)
 
-console.log(movements)
+//console.log(movements)
 
 // return < 0  -> a, b  (keep order)
 // return > 0  -> b, a  (switch order)
@@ -327,17 +433,131 @@ console.log(movements)
 //     return -1
 // })
 
-movements.sort((a, b ) => a - b )
-console.log(movements)
+// movements.sort((a, b ) => a - b )
+// console.log(movements)
 
 
 
 
 // Descending 
 // 
-movements.sort((a,b)=> b - a )
+// movements.sort((a,b)=> b - a )
 
-console.log(movements)
+// console.log(movements)
+
+/* 
+
+This time, Julia and Kate are studying the activity levels of different dog breeds.
+
+
+YOUR TASKS:
+1. Store the average weight of a 'husky' in a variable 'huskyWeight'
+2. Find the name of the only breed that likes both 'running' and 'fetch' ('dogBothActivities') Variable.
+3. Create an array 'allActivites' of all the activities of all the dog breeds
+4. Create an array 'uniqueActivities' that contains only the unique activities (no activity repititions). HINT: Use a technique with special data structure that we studied a few sections ago.
+5. Many dog breed like to swim. What other activities do these dogs like? Store all the OTHER activities these breeds like to do, in a unique array called 'swimmingAdjacent'.
+6. Do all the breeds have an average weight of 10kg or more? Log to the console whether 'true' or 'false'.
+7. Are there any breeds that are 'active'? 'Active' means that the dog has 3 or more activities. Log to console whether 'true' or 'false'.
+
+
+BONUS: has fetch activity and largestAverageWeight
+
+*/
+
+
+
+//TEST DATA
+
+// const breeds =[
+//   {
+//     breed: 'German Shepherd',
+//     averageWeight: 32,
+//     activities: ['fetch', 'swimming'],
+//   },
+//   {
+//     breed: 'Dalmatian',
+//     averageWeight: 24,
+//     activities: ['running', 'fetch','agility'],
+//   },
+//   {
+//     breed: 'Labrador',
+//     averageWeight: 28,
+//     activities: ['swimming', 'fetch' ],
+//   },
+//   {
+//     breed: 'Beagle',
+//     averageWeight: 12,
+//     activities: ['digging','fetch'],
+//   },
+//   {
+//     breed: 'Husky',
+//     averageWeight: 26,
+//     activities: [ 'running','agility', 'swimming' ],
+//   },
+//   {
+//     breed: 'Bulldog',
+//     averageWeight: 36,
+//     activities: ['sleeping'],
+//   },
+//   {
+//     breed: 'Poodle',
+//     averageWeight: 18,
+//     activities: ['agility','fetch'],
+//   },
+  
+// ]
+
+
+// Solution 1 
+// const huskyWeight = breeds.find((breed) => breed.breed === 'Husky').averageWeight
+// console.log(huskyWeight)
+
+
+// Solution 2
+// const dogBothActivities =breeds.find((breed)=> ( breed.activities.includes('running') && 
+// breed.activities.includes('fetch')) ).breed
+// console.log(dogBothActivities)
+
+
+// Solution 3
+// const allActivites = breeds.map((cur)=> cur.activities).flat()
+
+// const allActivites = breeds.flatMap((cur)=> cur.activities)
+// console.log(allActivites)
+
+// Solution 4
+// const uniqueActivities = [...new Set(allActivites)]
+
+// console.log(uniqueActivities)
+
+// Solution 5
+
+
+// const swimmingAdjacent = [...new Set(breeds.filter((breed)=> breed.activities.includes('swimming'))
+//                                 .flatMap((breed)=> breed.activities)
+//                                 .filter((activity)=> activity !== 'swimming'))]
+                              
+
+// console.log(swimmingAdjacent)
+
+
+// Solution 6
+
+// console.log(breeds.every((breed)=> breed.averageWeight >= 10 ))
+
+
+// Solution 7
+
+// console.log(breeds.some((breed)=> breed.activities.length >= 3))
+
+
+//BONUS
+// const fetchBreeds = breeds.filter((breed)=> breed.activities.includes('fetch'))
+//                           .map(breed => breed.averageWeight)
+
+// const heaviestFetchBreed = Math.max(...fetchBreeds)
+
+// console.log(heaviestFetchBreed)
 
 
 
