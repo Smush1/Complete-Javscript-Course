@@ -68,6 +68,11 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 
 
+
+///////////////////////////
+// FUNCTIONS
+
+
 // Updating UI of Current Account After transactions
 const updateUI = function(acc){
 
