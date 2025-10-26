@@ -8,6 +8,10 @@ const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+
+const section1 = document.querySelector('#section--1');
+
 const openModal = function (e) {
   e.preventDefault();
   modal.classList.remove('hidden');
@@ -32,6 +36,91 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
+
+
+
+
+
+
+/////// Smooth scrolling
+
+
+
+btnScrollTo.addEventListener('click',(e)=>{
+
+  const s1Coords= section1.getBoundingClientRect()
+  console.log(s1Coords)
+
+  // console.log(e.target.getBoundingClientRect())
+
+  console.log(`Current Scroll X ${window.scrollX}
+Current Scroll Y ${window.scrollY}`)
+
+console.log('height/width viewport', 
+  document.documentElement.clientHeight,
+  document.documentElement.clientWidth
+);
+
+//scrolling
+// window.scrollTo(
+//   s1Coords.x + window.scrollX, 
+//   s1Coords.y + window.scrollY);
+
+// window.scrollTo({
+//  left: s1Coords.x + window.scrollX, 
+//  top : s1Coords.y + window.scrollY,
+//  behavior: 'smooth'
+// } );
+
+section1.scrollIntoView({ behavior: 'smooth'})
+
+})
+
+///////////////////////
+//////////// Page navigation
+
+
+// Smooth scrolling by creating a copy of click event function in each link
+// document.querySelectorAll('.nav__link')
+// .forEach( function(el){
+//   el.addEventListener('click', function(e){
+//     e.preventDefault();
+
+//       const currentElementHref =  e.currentTarget.getAttribute('href')
+//       console.log(currentElementHref)
+
+//       const NewElement = document.querySelector(`${currentElementHref}`);
+//       NewElement.scrollIntoView({ behavior: 'smooth' })
+
+//   })
+// })
+
+
+// 1. Add event listener to common parent element;
+// 2. Determine what element originated the event;
+
+
+
+ // Matching above strategy
+document.querySelector('.nav__links').addEventListener('click',(e)=>{
+  e.preventDefault();
+  console.log(e.target)
+  console.log(e.target.classList)
+    if(e.target.classList.contains("nav__link")){
+    const hrefId = e.target.getAttribute('href');
+    document.querySelector(hrefId).scrollIntoView({ behavior: 'smooth'})
+    }
+})
+
+
+
+
+
+
+
+
+
+
 ///////////////
 /////////////////////////
 ////////////////////
@@ -42,36 +131,36 @@ document.addEventListener('keydown', function (e) {
 // console.log(document.head)
 // console.log(document.body)
 
-const header = document.querySelector('.header')
+// const header = document.querySelector('.header')
 
 // const allSections = document.querySelectorAll('.section')
 // console.log(allSections)
 
 // document.getElementById('section--1');
-const allBtns = document.getElementsByTagName('button'); // updated itself if any element will be deleted, unlike nodelist 
+// const allBtns = document.getElementsByTagName('button'); // updated itself if any element will be deleted, unlike nodelist 
 
-console.log(allBtns)
+// console.log(allBtns)
 
 // Creating and inserting an element
 
 
   //.insertAdjacentHTML
 
-  const message = document.createElement('div');
-  message.classList.add('cookie-message');
-  message.innerHTML =  `We use cookie for improved functionality and analytics. <button class="btn btn--close-cookie"> Got it! </button>`;
+  // const message = document.createElement('div');
+  // message.classList.add('cookie-message');
+  // message.innerHTML =  `We use cookie for improved functionality and analytics. <button class="btn btn--close-cookie"> Got it! </button>`;
 
   // header.prepend(message)
   // header.append(message.cloneNode(true))
   // header.before(message)
-  header.after(message)
+//   header.after(message)
 
 
-document.querySelector('.btn--close-cookie')
-.addEventListener('click',()=>{
-  // message.remove()
-  message.parentElement.removeChild(message)
-})
+// document.querySelector('.btn--close-cookie')
+// .addEventListener('click',()=>{
+//   // message.remove()
+//   message.parentElement.removeChild(message)
+// })
 
 
 ////////////////
@@ -143,45 +232,6 @@ document.querySelector('.btn--close-cookie')
 // logo.classList.toggle('s')
 
 
-
-
-
-
-/////// Smooth scrolling
-
-const btnScrollTo = document.querySelector('.btn--scroll-to');
-
-const section1 = document.querySelector('#section--1');
-
-btnScrollTo.addEventListener('click',(e)=>{
-
-  const s1Coords= section1.getBoundingClientRect()
-  console.log(s1Coords)
-
-  // console.log(e.target.getBoundingClientRect())
-
-  console.log(`Current Scroll X ${window.scrollX}
-Current Scroll Y ${window.scrollY}`)
-
-console.log('height/width viewport', 
-  document.documentElement.clientHeight,
-  document.documentElement.clientWidth
-);
-
-//scrolling
-// window.scrollTo(
-//   s1Coords.x + window.scrollX, 
-//   s1Coords.y + window.scrollY);
-
-// window.scrollTo({
-//  left: s1Coords.x + window.scrollX, 
-//  top : s1Coords.y + window.scrollY,
-//  behavior: 'smooth'
-// } );
-
-section1.scrollIntoView({ behavior: 'smooth'})
-
-})
 
 
 
