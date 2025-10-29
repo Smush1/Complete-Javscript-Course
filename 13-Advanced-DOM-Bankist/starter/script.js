@@ -101,11 +101,12 @@ section1.scrollIntoView({ behavior: 'smooth'})
 
 
 
- // Matching above strategy
+
 document.querySelector('.nav__links').addEventListener('click',(e)=>{
   e.preventDefault();
   console.log(e.target)
   console.log(e.target.classList)
+   // Matching above strategy
     if(e.target.classList.contains("nav__link")){
     const hrefId = e.target.getAttribute('href');
     document.querySelector(hrefId).scrollIntoView({ behavior: 'smooth'})
@@ -115,7 +116,37 @@ document.querySelector('.nav__links').addEventListener('click',(e)=>{
 
 
 
+//  Tabbed Components
 
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container')
+const tabsContent = document.querySelectorAll('.operations__content')
+
+// tabs.forEach(t=>t.addEventListener('click',(e)=>{
+//   console.log('TAB')
+// }))
+
+
+tabsContainer.addEventListener('click',(e)=>{
+  const clicked = e.target.closest('.operations__tab');
+  console.log(clicked)
+
+
+  // Guard Clause
+  if(!clicked) return
+
+  // Active Tab
+  tabs.forEach(tab=>tab.classList.remove('operations__tab--active'))
+  clicked.classList.add('operations__tab--active')
+
+  //Activate Content
+  console.log(clicked.dataset.tab)
+
+  tabsContent.forEach(content=> content.classList.remove('operations__content--active'))
+  document.querySelector(`.operations__content--${clicked.dataset.tab}`)
+  .classList.add('operations__content--active')
+
+})
 
 
 
@@ -141,6 +172,7 @@ document.querySelector('.nav__links').addEventListener('click',(e)=>{
 
 // console.log(allBtns)
 
+////////////////////
 // Creating and inserting an element
 
 
@@ -150,11 +182,15 @@ document.querySelector('.nav__links').addEventListener('click',(e)=>{
   // message.classList.add('cookie-message');
   // message.innerHTML =  `We use cookie for improved functionality and analytics. <button class="btn btn--close-cookie"> Got it! </button>`;
 
+// Inserting Elements
+
   // header.prepend(message)
   // header.append(message.cloneNode(true))
   // header.before(message)
 //   header.after(message)
 
+
+// Removing Child
 
 // document.querySelector('.btn--close-cookie')
 // .addEventListener('click',()=>{
@@ -311,4 +347,51 @@ document.querySelector('.nav__links').addEventListener('click',(e)=>{
 
 
 
+
+/////////////////////
+////////////// DOM Traversing
+
+
+///// Child Element
+
+// const h1 = document.querySelector('h1')
+
+// Going downwards: child  -  It will go deep down to each element contain highlight class
+// console.log(h1.querySelectorAll('.highlight'));
+
+
+// for all type of child elements
+// console.log(h1.childNodes)
+
+// For direct child - HTML Collection (Live/ updated)
+
+// console.log(h1.children)
+
+// h1.firstElementChild.style.color = "white";
+// h1.lastElementChild.style.color = "orangered";
+
+
+//// Going Upwards- Parent
+
+// console.log(h1.parentNode);
+// console.log(h1.parentElement)
+
+// h1.closest('header').style.background = 'var(--gradient-secondary)'
+// h1.closest('h1').style.background = "var(--gradient-primary)"
+
+//// Going Sideways 
+
+// console.log(h1.previousElementSibling);
+// console.log(h1.nextElementSibling)
+
+// console.log(h1.previousSibling)
+// console.log(h1.nextSibling)
+
+// For all sibling
+// console.log(h1.parentElement.children);
+
+// [...h1.parentElement.children].forEach((e)=>{
+//   if(e !== h1) e.style.transform = "scale(0.5)"
+// }
+// )
 
