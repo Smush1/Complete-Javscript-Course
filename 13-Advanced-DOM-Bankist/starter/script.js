@@ -202,6 +202,173 @@ nav.addEventListener('mouseout', function(e){
 })
 
 
+// Sticky Navigation 
+
+// const initialCoords =  section1.getBoundingClientRect();
+
+// console.log(initialCoords)
+
+
+// window.addEventListener('scroll',()=>{
+//   console.log(window.scrollY)
+//   if (window.scrollY > initialCoords.top)
+//     nav.classList.add('sticky')
+//   else
+//     nav.classList.remove('sticky')
+// })
+
+
+///// Sticky navigation Implementation using Intersection Observer API
+
+
+// The callback will be called everytime root element intersect at given threshold
+// const obsCallback = function( enteries, observer){
+//   enteries.forEach((entry) =>
+//   console.log(entry) )
+// }
+
+
+// here "root: null" meand we are observing whole viewport for intersection element,
+//  "threshold: 0.1" means we are looking for 10% intersection
+
+// The calback function will we called whenever section1 element intersect the viewport at 10% 
+// (no matter scrolling up or down)
+
+// const obsOptions = {
+//   root: null,
+//   threshold: 0.1
+// }
+
+// const observer = new IntersectionObserver(obsCallback, obsOptions);
+// observer.observe(section1)
+
+
+const header = document.querySelector('.header')
+const navHeight = nav.getBoundingClientRect().height
+
+const stickyNavCallback = function(enteries){
+  const [entry] = enteries;
+  if (!entry.isIntersecting)
+   nav.classList.add('sticky')
+  else{
+    nav.classList.remove('sticky')
+  }
+}
+
+
+const headerObserver = new IntersectionObserver(stickyNavCallback,{
+  root: null,
+  threshold: 0,
+  rootMargin: `-${navHeight}px`
+});
+
+
+headerObserver.observe(header)
+
+
+// Reveal on Scroll
+
+const allSections = document.querySelectorAll('.section');
+
+const revealOnScroll = function(entries, observer){
+  entries.forEach((entry)=>
+   { 
+    if(!entry.isIntersecting) return;
+    entry.target.classList.remove('section--hidden');
+
+  })
+}
+
+const sectionObserver = new IntersectionObserver( revealOnScroll, {
+  root: null,
+  threshold: 0.15
+})
+
+allSections.forEach((section)=>{
+/*   section.classList.add('section--hidden'); */
+  sectionObserver.observe(section);
+})
+
+
+////  Lazy Loading Images
+
+const imgTargets = document.querySelectorAll('img[data-src]');
+
+
+const lazyLoad = (entries, observer)=>{
+  entries.forEach((entry)=>{
+
+    if (!entry.isIntersecting) return;
+    entry.target.src = entry.target.dataset.src;
+    entry.target.addEventListener('load',()=>{
+        entry.target.classList.remove('lazy-img');
+    })
+    observer.unobserve(entry.target)
+  })
+}
+
+const imgObserver = new IntersectionObserver( lazyLoad, {
+  root: null,
+  threshold: 0.6
+} )
+
+
+imgTargets.forEach((imgTarget)=>{
+  // observing each section seperately
+  imgObserver.observe(imgTarget);
+})
+
+
+//// Slider
+
+const slider = document.querySelector('.slider');
+slider.style.transform = 'scale(0.5)';
+slider.style.overflow = 'visible';
+
+const slides = document.querySelectorAll('.slide');
+
+const leftBtn = document.querySelector('.slider__btn--left');
+const rightBtn = document.querySelector('.slider__btn--right');
+
+slides.forEach((s,i)=>
+   s.style.transform = `translateX(${i * 100}%)`
+// 0, 100%, 200%, 300%
+)
+
+
+let currSlide = 0;
+
+rightBtn.addEventListener('click',()=>{
+  currSlide++;
+
+  slides.forEach((s,i)=>{
+    if( currSlide === slides.length ) currSlide = 0;
+   s.style.transform = `translateX(${(i-currSlide) * 100}%)`
+// 0, 100%, 200%, 300%
+}
+)
+
+console.log(currSlide)
+})
+
+
+leftBtn.addEventListener('click',()=>{
+  currSlide--;
+
+  slides.forEach((s,i)=>{
+    if (currSlide < 0 ) currSlide = slides.length -1
+   s.style.transform = `translateX(${(i-currSlide) * 100}%)`
+// 0, 100%, 200%, 300%
+}
+)
+
+console.log(currSlide)
+})
+
+
+
+
+
 
 ///////////////
 /////////////////////////
